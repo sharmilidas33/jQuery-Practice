@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document- Jquery</title>
+    <script src="jquery.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+</head>
+<style>
+    #circle{
+        width: 200px;
+        height: 200px;
+        border-radius: 100px;
+        background-color:aquamarine ;
+    }
+    #error{
+        margin: 10px;
+        color: red;
+    }
+    #square{
+        width: 200px;
+        height: 200px;
+        background-color:rgb(19, 125, 90) ;
+        margin: 10px;
+    }
+</style>
+<body>
+
+    <div id="circle"></div>
+    <!-- <p>This is a circle.</p> -->
+
+    <div id="square">
+
+    </div>
+
+    <div id="error"></div>
+
+    <form action="" method="post" id="validationForm">
+        <label for="email">Email:</label><br>
+        <input id="email" name="email" required><br><br>
+        
+        <label for="telephone">Telephone:</label><br>
+        <input type="tel" id="phone" name="telephone" required><br><br>
+        
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+        
+        <label for="confirm_password">Confirm Password:</label><br>
+        <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+        
+        <input type="submit" value="Submit" id="submitBtn">
+    </form>
+
+    <!-- <div id="accordian">
+        <div>
+            <h1>Title</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quae aspernatur adipisci sit hic amet quam deserunt, fuga officia optio ducimus culpa repudiandae necessitatibus delectus minus minima, fugiat nostrum quisquam!</p>
+        </div>
+
+        <div>
+            <h1>Title</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quae aspernatur adipisci sit hic amet quam deserunt, fuga officia optio ducimus culpa repudiandae necessitatibus delectus minus minima, fugiat nostrum quisquam!</p>
+        </div>
+
+        <div>
+            <h1>Title</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quae aspernatur adipisci sit hic amet quam deserunt, fuga officia optio ducimus culpa repudiandae necessitatibus delectus minus minima, fugiat nostrum quisquam!</p>
+        </div>
+    </div> -->
+    
+    <script>
+        // if(jQuery){
+        //     alert("jQuery is installed!");
+        // }
+        // else{
+        //     alert("jQuery is not installed");
+        // }
+
+        $("#circle").click(function(){
+            // alert("This is a circle");
+            // $("p").html("This is a new circle!");
+            // $("p").fadeOut();
+            // $(this).animate(
+            //     {width:"300px",
+            //     height:"300px"},
+            //     1500);
+        })
+
+
+        //AJAX Sample
+        // $.ajax({
+        //     url:"test.html"
+        // }).done(function(data){
+        //     alert(data);
+        // })
+
+
+        //Form Validation in jQuery
+        $("#validationForm").submit(function(event){
+            var errorMessage= "";
+            event.preventDefault();
+            // alert('test');
+
+            function isEmail(email) {
+                var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                return regex.test(email);
+            }
+
+            if(!isEmail($('#email').val())){
+                errorMessage="</br> Enter a valid email address!";
+            }
+
+            if($.isNumeric($('#phone').val())){
+                errorMessage="</br> Enter a valid phone number!";
+            }
+
+            if($("#password").val()!=$("#confirm_password").val()){
+                errorMessage="</br> Enter matching passwords!";
+            }
+
+            if(errorMessage=" "){
+                alert("Success");
+            }
+            else{
+                $("#error").html(errorMessage);
+            }
+        });
+
+    //jQuery UI
+    $("#circle").draggable();
+
+    $("#square").droppable({
+        drop: function(ui, event){
+            $("#square").css("background-color","green");
+            alert("Dropped");
+        }
+    })
+
+    // $("#accordian").accordian();
+    </script>
+</body>
+</html>
